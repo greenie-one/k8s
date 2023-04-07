@@ -6,8 +6,6 @@ on:
       - main
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
   KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
 
 jobs:
@@ -34,5 +32,6 @@ jobs:
 
       - name: "Mongo DB"
         run: |
+          kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
           helm repo add bitnami https://charts.bitnami.com/bitnami 
           helm install --namespace mongodb mongodb-dev bitnami/mongodb
