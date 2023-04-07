@@ -28,12 +28,11 @@ jobs:
           echo $KUBECONFIG_B64 | base64 --decode > greenie-kubeconfig.yaml
           echo "KUBECONFIG=$(realpath greenie-kubeconfig.yaml)" >> $GITHUB_ENV
 
-      - name: "Mongo DB"
-        uses: "deliverybot/helm@v1"
+      - uses: azure/setup-helm@v3
         with:
-          release: "mongodb-dev"
-          namespace: "mongo"
-          chart: "app"
-          token: "${{ github.token }}"
-          repo: "https://charts.bitnami.com/bitnami"
-          repo-alias: bitnami
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Mongo DB"
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami 
+          helm install --namespace mongodb mongodb-dev bitnami/mongodb
