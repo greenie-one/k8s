@@ -50,4 +50,4 @@ jobs:
 
       - name: "Apply Ingress"
         run: |
-          kubectl apply -f ingress/backend.yaml
+          kubectl apply --namespace nginx-ingress -f ingress/backend.yaml
