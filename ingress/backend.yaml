@@ -5,8 +5,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "172-105-46-107.ip.linodeusercontent.com"
-      http:
+    # - host: "172-105-46-107.ip.linodeusercontent.com"
+    - http:
         paths:
           - pathType: Prefix
             path: "/api"
