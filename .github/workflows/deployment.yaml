@@ -30,23 +30,24 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Mongo DB"
-        if: success() || failure()
+      - name: "Helm repo setup"
         run: |
-          kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace mongodb
+          kubectl create namespace nginx-ingress
+
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
           helm repo update
-          helm install --namespace mongodb mongodb-dev bitnami/mongodb
+
+      - name: "Mongo DB"
+        run: |
+          helm upgrade --install --namespace mongodb mongodb-dev bitnami/mongodb
 
       - name: "Nginx ingress controller"
-        if: success() || failure()
         run: |
-          kubectl create namespace nginx-ingress --dry-run=client -o yaml | kubectl apply -f -
-          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-          helm repo update
-          helm install --namespace nginx-ingress nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+          helm upgrade --install --namespace nginx-ingress nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
 
       - name: "Apply Ingress"
-        if: success() || failure()
         run: |
           kubectl apply -f ingress/backend.yaml
