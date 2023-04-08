@@ -2,8 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
@@ -11,7 +9,7 @@ spec:
         paths:
           - pathType: Prefix
             path: /
-            frontend:
+            backend:
               service:
                 name: greenie-mvp-entrypoint
                 port:
