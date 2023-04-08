@@ -33,5 +33,17 @@ jobs:
       - name: "Mongo DB"
         run: |
           kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
-          helm repo add bitnami https://charts.bitnami.com/bitnami 
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
           helm install --namespace mongodb mongodb-dev bitnami/mongodb
+
+      - name: "Nginx ingress controller"
+        run: |
+          kubectl create namespace nginx-ingress --dry-run=client -o yaml | kubectl apply -f -
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo update
+          helm install --namespace nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+
+      - name: "Apply Ingress"
+        run: |
+          kubectl apply -f ingress/backend.yaml
