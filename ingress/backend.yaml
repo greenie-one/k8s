@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: backend-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
@@ -11,7 +11,7 @@ spec:
     - http:
         paths:
           - pathType: Prefix
-            path: /api/(.+)
+            path: /api(/|$)(.*)
             backend:
               service:
                 name: greenie-mvp-entrypoint
