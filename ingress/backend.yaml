@@ -12,6 +12,6 @@ spec:
             path: "/api"
             backend:
               service:
-                name: greenie-backend
+                name: greenie-mvp-entrypoint
                 port:
                   number: 8080
