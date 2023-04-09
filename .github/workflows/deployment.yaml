@@ -33,10 +33,10 @@ jobs:
       - name: "Helm repo setup"
         run: |
           kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
-          kubectl create namespace nginx-ingress --dry-run=client -o yaml | kubectl apply -f -
 
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo add jetstack https://charts.jetstack.io
 
           helm repo update
 
@@ -46,7 +46,13 @@ jobs:
 
       - name: "Nginx ingress controller"
         run: |
-          helm upgrade --install --namespace nginx-ingress nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+
+          kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
+
+          kubectl apply --namespace default -f issuers/dev.yaml
+
+          helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.11.0
+          helm upgrade --install --namespace nginx-ingress --create-namespace nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
 
       - name: "Apply Ingress"
         run: |
