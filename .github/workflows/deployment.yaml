@@ -50,6 +50,7 @@ jobs:
           kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
 
           kubectl apply --namespace default -f issuers/dev.yaml
+          kubectl apply --namespace default -f issuers/prod.yaml
 
           helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.11.0
           helm upgrade --install --namespace nginx-ingress --create-namespace nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
