@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - api.greenie.one
-      secretName: greenie-tls
+      secretName: greenie-backend-tls
   rules:
     - host: api.greenie.one
       http:
