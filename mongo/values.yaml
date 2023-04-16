@@ -1,0 +1,13 @@
+architecture: replicaset
+replicaCount: 1
+externalAccess:
+  enabled: true
+  service:
+    type: LoadBalancer
+    port: 27017
+  autoDiscovery:
+    enabled: true
+serviceAccount:
+  create: true
+rbac:
+  create: true
