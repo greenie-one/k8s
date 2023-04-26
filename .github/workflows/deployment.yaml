@@ -37,6 +37,7 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           helm repo add jetstack https://charts.jetstack.io
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
           helm repo update
 
@@ -59,3 +60,8 @@ jobs:
         run: |
           kubectl apply --namespace backend -f ingress/backend.yaml
           kubectl apply --namespace frontend -f ingress/frontend.yaml
+          kubectl apply --namespace grafana -f ingress/frontend.yaml
+
+      # - name: "Grafana"
+      #   run: |
+      #     helm upgrade --namespace grafana prometheus prometheus-community/kube-prometheus-stack

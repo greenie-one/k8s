@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: greenie-mvp-entrypoint
+                name: greenie-mvp-backend-dev
                 port:
                   number: 8080
