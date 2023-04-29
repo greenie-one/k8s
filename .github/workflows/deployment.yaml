@@ -33,6 +33,7 @@ jobs:
       - name: "Helm repo setup"
         run: |
           kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace redis --dry-run=client -o yaml | kubectl apply -f -
 
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -44,6 +45,10 @@ jobs:
       - name: "Mongo DB"
         run: |
           helm upgrade --install --namespace mongodb -f mongo/values.yaml mongodb-dev bitnami/mongodb
+
+      - name: "Redis"
+        run: |
+          helm install --namespace redis -f redis/values.yaml redis-dev bitnami/redis
 
       - name: "Nginx ingress controller"
         run: |
