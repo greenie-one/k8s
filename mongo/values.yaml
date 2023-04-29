@@ -1,7 +1,7 @@
 architecture: replicaset
 replicaCount: 1
 externalAccess:
-  enabled: true
+  enabled: false
   service:
     type: LoadBalancer
     port: 27017

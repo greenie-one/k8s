@@ -48,7 +48,7 @@ jobs:
 
       - name: "Redis"
         run: |
-          helm install --namespace redis -f redis/values.yaml redis-dev bitnami/redis
+          helm upgrade --install --namespace redis -f redis/values.yaml redis-dev bitnami/redis
 
       - name: "Nginx ingress controller"
         run: |
