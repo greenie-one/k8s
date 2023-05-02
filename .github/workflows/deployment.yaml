@@ -34,6 +34,8 @@ jobs:
         run: |
           kubectl create namespace mongodb --dry-run=client -o yaml | kubectl apply -f -
           kubectl create namespace redis --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace grafana --dry-run=client -o yaml | kubectl apply -f -
+
 
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -59,14 +61,14 @@ jobs:
           kubectl apply --namespace default -f issuers/prod.yaml
 
           helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.11.0
-          helm upgrade --install --namespace nginx-ingress --create-namespace nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+          helm upgrade --install --namespace nginx-ingress --create-namespace nginx-ingress ingress-nginx/ingress-nginx --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz --set controller.publishService.enabled=true
 
       - name: "Apply Ingress"
         run: |
           kubectl apply --namespace backend -f ingress/backend.yaml
           kubectl apply --namespace frontend -f ingress/frontend.yaml
-          # kubectl apply --namespace grafana -f ingress/frontend.yaml
+          kubectl apply --namespace redis -f ingress/redis.yaml
 
-      # - name: "Grafana"
-      #   run: |
-      #     helm upgrade --namespace grafana prometheus prometheus-community/kube-prometheus-stack
+      - name: "Grafana"
+        run: |
+          helm upgrade --install --namespace grafana prometheus prometheus-community/kube-prometheus-stack
