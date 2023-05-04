@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backend-ingress
+  name: frontend-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 
@@ -9,16 +9,16 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - api.greenie.one
-      secretName: greenie-backend-tls-prod
+        - dev.greenie.one
+      secretName: greenie-frontend-dev-tls-prod
   rules:
-    - host: api.greenie.one
+    - host: dev.greenie.one
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: /
             backend:
               service:
-                name: greenie-mvp-backend-dev
+                name: greenie-mvp-frontend-dev
                 port:
-                  number: 8080
+                  number: 3000

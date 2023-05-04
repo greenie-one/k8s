@@ -19,6 +19,6 @@ spec:
             path: /
             backend:
               service:
-                name: greenie-mvp-frontend-dev
+                name: greenie-mvp-frontend-prod
                 port:
                   number: 3000

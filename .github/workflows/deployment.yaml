@@ -65,9 +65,11 @@ jobs:
 
       - name: "Apply Ingress"
         run: |
-          kubectl apply --namespace backend -f ingress/backend.yaml
-          kubectl apply --namespace frontend -f ingress/frontend.yaml
-          kubectl apply --namespace redis -f ingress/redis.yaml
+          kubectl apply --namespace backend -f ingress/dev/backend.yaml
+          kubectl apply --namespace frontend -f ingress/dev/frontend.yaml
+
+          kubectl apply --namespace backend -f ingress/prod/backend.yaml
+          kubectl apply --namespace frontend -f ingress/prod/frontend.yaml
 
       - name: "Grafana"
         run: |
