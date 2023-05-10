@@ -71,6 +71,6 @@ jobs:
           kubectl apply --namespace backend -f ingress/prod/backend.yaml
           kubectl apply --namespace frontend -f ingress/prod/frontend.yaml
 
-      - name: "Grafana"
-        run: |
-          helm upgrade --install --namespace grafana prometheus prometheus-community/kube-prometheus-stack
+      # - name: "Grafana"
+      #   run: |
+      #     helm upgrade --install --namespace grafana prometheus prometheus-community/kube-prometheus-stack
