@@ -1,3 +1,8 @@
+replica:
+  replicaCount: 1
 master:
   service:
     type: LoadBalancer
+    loadBalancerIP: "20.207.84.19"
+persistence:
+  size: 1Gi

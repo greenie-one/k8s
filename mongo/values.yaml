@@ -5,9 +5,17 @@ externalAccess:
   service:
     type: LoadBalancer
     port: 27017
+    loadBalancerIPs:
+      - 20.207.84.19
   autoDiscovery:
     enabled: true
 serviceAccount:
   create: true
 rbac:
   create: true
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+persistence:
+  size: 2Gi
