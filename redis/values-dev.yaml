@@ -14,4 +14,4 @@ commonConfiguration: |-
   # Disable RDB persistence, AOF persistence already enabled.
   save ""
   # Use external ACL file
-  # aclfile /data/users.acl
+  aclfile /data/users.acl
