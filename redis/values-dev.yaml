@@ -1,0 +1,17 @@
+replica:
+  replicaCount: 1
+  persistence:
+    size: 1Gi
+master:
+  service:
+    type: LoadBalancer
+    loadBalancerIP: "20.207.84.19"
+  persistence:
+    size: 1Gi
+commonConfiguration: |-
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
+  # Use external ACL file
+  # aclfile /data/users.acl

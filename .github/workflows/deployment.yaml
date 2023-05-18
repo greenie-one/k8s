@@ -44,13 +44,10 @@ jobs:
 
           helm repo update
 
-      - name: "Mongo DB"
-        run: |
-          helm upgrade --install --namespace mongodb -f mongo/values.yaml mongodb-dev bitnami/mongodb
-
       - name: "Redis"
         run: |
-          helm upgrade --install --namespace redis -f redis/values.yaml redis-dev bitnami/redis
+          helm upgrade --install --namespace redis -f redis/values-dev.yaml redis-dev bitnami/redis
+          helm upgrade --install --namespace redis -f redis/values-prod.yaml redis-prod bitnami/redis
 
       - name: "Nginx ingress controller"
         run: |
@@ -71,6 +68,6 @@ jobs:
           kubectl apply --namespace backend -f ingress/prod/backend.yaml
           kubectl apply --namespace frontend -f ingress/prod/frontend.yaml
 
-      # - name: "Grafana"
-      #   run: |
-      #     helm upgrade --install --namespace grafana prometheus prometheus-community/kube-prometheus-stack
+      - name: "Grafana"
+        run: |
+          helm upgrade --install --namespace grafana -f prometheus/values.yaml prometheus prometheus-community/kube-prometheus-stack
