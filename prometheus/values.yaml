@@ -9,3 +9,5 @@ prometheusOperator:
         memory: 50Mi
 grafana:
   enabled: false
+alertmanager:
+  enabled: false

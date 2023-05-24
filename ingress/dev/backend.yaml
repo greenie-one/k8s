@@ -4,6 +4,10 @@ metadata:
   name: backend-ingress-dev
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/auth-url: http://greenie-auth-dev.auth.svc.cluster.local:8080/validate_token
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      auth_request_set $token $upstream_http_x_user_details;    
+      proxy_set_header x-user-details $token;
 
 spec:
   ingressClassName: nginx

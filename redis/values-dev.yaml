@@ -1,3 +1,5 @@
+global:
+  storageClass: azurefile
 replica:
   replicaCount: 1
   persistence:
