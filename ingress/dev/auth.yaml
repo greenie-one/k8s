@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auth-ingress-dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev-api.greenie.one
+      secretName: greenie-auth-dev-tls-prod
+  rules:
+    - host: dev-api.greenie.one
+      http:
+        paths:
+          - path: /auth(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: greenie-auth-dev
+                port:
+                  number: 8080
