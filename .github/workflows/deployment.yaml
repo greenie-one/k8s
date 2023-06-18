@@ -66,12 +66,13 @@ jobs:
           kubectl apply --namespace frontend -f ingress/dev/frontend.yaml
           kubectl apply --namespace auth -f ingress/dev/auth.yaml
           kubectl apply --namespace utils -f ingress/dev/utils.yaml
+          kubectl apply --namespace remote -f ingress/dev/remote.yaml
           kubectl apply -f ingress/dev/hoppscotch.yaml
 
           kubectl apply --namespace backend -f ingress/prod/backend.yaml
           kubectl apply --namespace frontend -f ingress/prod/frontend.yaml
-          # kubectl apply --namespace auth -f ingress/prod/auth.yaml
-          # kubectl apply --namespace utils -f ingress/prod/utils.yaml
+          kubectl apply --namespace auth -f ingress/prod/auth.yaml
+          kubectl apply --namespace utils -f ingress/prod/utils.yaml
 
       - name: "Grafana"
         run: |

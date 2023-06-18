@@ -4,6 +4,13 @@ metadata:
   name: backend-ingress-prod
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://greneie.one, https://dev.greenie.one"
+    nginx.ingress.kubernetes.io/auth-url: http://greenie-auth-prod.auth.svc.cluster.local:8080/validate_token
+    nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, DELETE, PATCH, OPTIONS
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      auth_request_set $token $upstream_http_x_user_details;    
+      proxy_set_header x-user-details $token;
 
 spec:
   ingressClassName: nginx
