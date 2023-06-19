@@ -5,7 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://greneie.one, https://dev.greenie.one, http://localhost:3000"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://greenie.one, https://dev.greenie.one, http://localhost:3000"
     nginx.ingress.kubernetes.io/auth-url: http://greenie-auth-dev.auth.svc.cluster.local:8080/validate_token
     nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, DELETE, PATCH, OPTIONS
     nginx.ingress.kubernetes.io/configuration-snippet: |
