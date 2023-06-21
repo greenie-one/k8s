@@ -1,5 +1,5 @@
 ACL Config - Dev
-ACL SETUSER greenie_mvp +@all-channels
+ACL SETUSER greenie_mvp allchannels
 
 ACL Config - Prod
-ACL SETUSER greenie_mvp_prod +@all-channels
+ACL SETUSER greenie_mvp_prod allchannels
