@@ -1,0 +1,7 @@
+controller:
+  maxmindLicenseKey: "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"
+  enable-real-ip: true
+  config:
+    use-geoip2: "true"
+  service:
+    externalTrafficPolicy: "Local"
