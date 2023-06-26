@@ -41,6 +41,7 @@ jobs:
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           helm repo add jetstack https://charts.jetstack.io
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add azure-marketplace https://marketplace.azurecr.io/helm/v1/repo
 
           helm repo update
 
@@ -67,13 +68,15 @@ jobs:
           kubectl apply --namespace auth -f ingress/dev/auth.yaml
           kubectl apply --namespace utils -f ingress/dev/utils.yaml
           kubectl apply --namespace remote -f ingress/dev/remote.yaml
-          kubectl apply -f ingress/dev/hoppscotch.yaml
 
           kubectl apply --namespace backend -f ingress/prod/backend.yaml
           kubectl apply --namespace frontend -f ingress/prod/frontend.yaml
           kubectl apply --namespace auth -f ingress/prod/auth.yaml
           kubectl apply --namespace utils -f ingress/prod/utils.yaml
 
+          kubectl apply --namespace grafana -f ingress/tools/grafana.yaml
+
       - name: "Grafana"
         run: |
           helm upgrade --install --namespace grafana -f prometheus/values.yaml prometheus prometheus-community/kube-prometheus-stack
+          helm upgrade --install --namespace grafana loki azure-marketplace/grafana-loki

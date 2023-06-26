@@ -8,6 +8,6 @@ prometheusOperator:
         cpu: 100m
         memory: 50Mi
 grafana:
-  enabled: false
+  enabled: true
 alertmanager:
   enabled: false
