@@ -6,3 +6,11 @@ ingester:
     accessModes:
     - ReadWriteOnce
     size: 1Gi
+querier:
+  persistence:
+    enabled: true
+    type: pvc
+    storageClass: azurefile
+    accessModes:
+    - ReadWriteOnce
+    size: 1Gi
