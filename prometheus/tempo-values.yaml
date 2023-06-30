@@ -6,7 +6,7 @@ ingester:
     enabled: true
     size: 1Gi
     type: pvc
-    storageClassName: azurefile
+    storageClass: azurefile
     accessModes:
     - ReadWriteOnce
 
