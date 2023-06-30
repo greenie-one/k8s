@@ -80,6 +80,6 @@ jobs:
       - name: "Grafana"
         run: |
           helm upgrade --install --namespace grafana -f prometheus/values.yaml prometheus prometheus-community/kube-prometheus-stack
-          helm upgrade --install --namespace grafana loki azure-marketplace/grafana-loki
+          helm upgrade --install --namespace grafana -f prometheus/loki-values.yaml loki azure-marketplace/grafana-loki
           helm upgrade --install --namespace grafana -f prometheus/tempo-values.yaml tempo grafana/tempo-distributed
 

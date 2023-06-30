@@ -1,0 +1,8 @@
+ingester:
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: azurefile
+    accessModes:
+    - ReadWriteOnce
+    size: 1Gi

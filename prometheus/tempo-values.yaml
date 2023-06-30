@@ -5,6 +5,10 @@ ingester:
   persistence:
     enabled: true
     size: 1Gi
+    type: pvc
+    storageClassName: azurefile
+    accessModes:
+    - ReadWriteOnce
 
 traces:
   otlp:

@@ -12,7 +12,7 @@ grafana:
   persistence:
     enabled: true
     type: pvc
-    storageClassName: default
+    storageClassName: azurefile
     accessModes:
     - ReadWriteOnce
     size: 1Gi
