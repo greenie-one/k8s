@@ -1,8 +1,11 @@
 ingester:
+  replicas: 1
+  config:
+    replication_factor: 1
   persistence:
     enabled: true
     size: 1Gi
-    
+
 traces:
   otlp:
     http:
