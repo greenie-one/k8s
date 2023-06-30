@@ -9,5 +9,14 @@ prometheusOperator:
         memory: 50Mi
 grafana:
   enabled: true
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: default
+    accessModes:
+    - ReadWriteOnce
+    size: 1Gi
+    finalizers:
+    - kubernetes.io/pvc-protection
 alertmanager:
   enabled: false
