@@ -12,11 +12,9 @@ grafana:
   persistence:
     enabled: true
     type: pvc
-    storageClassName: azurefile
+    storageClassName: default
     accessModes:
     - ReadWriteOnce
     size: 1Gi
-    finalizers:
-    - kubernetes.io/pvc-protection
 alertmanager:
   enabled: false
