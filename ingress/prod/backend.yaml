@@ -11,6 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       auth_request_set $token $upstream_http_x_user_details;    
       proxy_set_header x-user-details $token;
+      proxy_set_header x-location "$geoip2_latitude,$geoip2_longitude";
 
 spec:
   ingressClassName: nginx
